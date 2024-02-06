@@ -1,0 +1,281 @@
+paths:
+  /v1/admin/admin:
+    post:
+      tags: ["AdminByAdmin(Admin manipula Admin) - Portal Gerencial"]
+      summary: Rota para cadastrar admin.
+      description: Rota para cadastrar admin.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAdmin'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    required: true
+                    example: Usuário cadastrado com sucesso
+
+        "400":
+          description: Erros envolvendo algum campo obrigatório que não foi enviado ou algum campo inválido.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: email é inválido.
+
+        "403":
+          description: Sem permissão para acessar esse recurso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Sem permissão para acessar esse recurso.
+
+        "404":
+          description: Usuário não encontrado na base de dados.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Usuário não encontrado na base de dados.
+
+        "500":
+          description: Erro interno no servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Erro interno no servidor.
+    get:
+      tags: ["AdminByAdmin(Admin manipula Admin) - Portal Gerencial"]
+      summary: Rota para listar/filtrar usuários, menos usuário funcionário.
+      description: Rota para usuários com permissão listar/filtrar usuários.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/name_indexAdmin'
+        - $ref: '#/components/parameters/status_indexAdmin'
+        - $ref: '#/components/parameters/type_indexAdmin'
+        - $ref: '#/components/parameters/paginate_indexAdmin'
+        - $ref: '#/components/parameters/limit_indexAdmin'
+        - $ref: '#/components/parameters/page_indexAdmin'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  countUsers:
+                    type": "number"
+                    example: 1
+                  users:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/UserDefault"
+        "400":
+          description: Erros envolvendo algum campo obrigatório que não foi enviado ou algum campo inválido.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: email é inválido.
+        "403":
+          description: Sem permissão para acessar esse recurso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Sem permissão para acessar esse recurso.
+        "404":
+          description: Usuário não encontrado na base de dados.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Usuário não encontrado na base de dados.
+        "500":
+          description: Erro interno no servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Erro interno no servidor.
+
+
+
+  /v1/admin/admin/{id}:
+    get:
+      tags: ["AdminByAdmin(Admin manipula Admin) - Portal Gerencial"]
+      summary: Rota para mostrar usuário por Id.
+      description: Rota para admins com permissão ver dados de usuário através do Id.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/id_showAdmin'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDefault'
+        "400":
+          description: Erros envolvendo algum campo obrigatório que não foi enviado ou algum campo inválido.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: email é inválido.
+        "403":
+          description: Sem permissão para acessar esse recurso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Sem permissão para acessar esse recurso.
+        "404":
+          description: Usuário não encontrado na base de dados.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Usuário não encontrado na base de dados.
+        "500":
+          description: Erro interno no servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Erro interno no servidor.
+    patch:
+      tags: ["AdminByAdmin(Admin manipula Admin) - Portal Gerencial"]
+      summary: Rota para editar usuário por Id.
+      description: Rota para editar usuário por Id.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/id_showAdmin'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/editAdmin'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+             schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    required: true
+                    example: Usuário editado com sucesso!
+                  user:
+                    $ref: '#/components/schemas/UserDefault'
+        "400":
+          description: Erros envolvendo algum campo obrigatório que não foi enviado ou algum campo inválido.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: email é inválido.
+        "403":
+          description: Sem permissão para acessar esse recurso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Sem permissão para acessar esse recurso.
+        "404":
+          description: Usuário não encontrado na base de dados.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Usuário não encontrado na base de dados.
+        "500":
+          description: Erro interno no servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Erro interno no servidor.

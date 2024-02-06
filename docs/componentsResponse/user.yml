@@ -1,0 +1,135 @@
+components:
+  schemas:
+    UserDefault:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          required: true
+          example: Admin Master
+        email:
+          type: string
+          required: true
+          example: user@admin.com
+        document:
+          type: string
+          required: true
+          description: cpj ou cnpj
+          example: 12312312312
+        phone:
+          type: string
+          required: false
+          example: 12912341234
+        birthday:
+          type: string
+          required: false
+          example: 21/02/2000
+        type:
+          type: string
+          required: true
+          enum:
+            [
+              Admin,
+              Admin Master,
+              Cliente,
+              E_Admin,
+              Vendas,
+              Estoque,
+              Fabricação,
+              Instalação,
+              Financeiro,
+            ]
+          example: Admin Master
+        status:
+          type: string
+          required: true
+          enum: [Ativo, Inativo]
+          example: Ativo
+        image:
+          type: string
+          required: false
+          example: www.image.com.br/imagemDoAdmin
+        imageKey:
+          type: string
+          required: false
+          example: fasdfmklmklmf51s56dfdf-ImagemDoAdmin
+        userHasPermissions:
+          type: array
+          items:
+            $ref: "#/components/schemas/UserHasPermission"
+        myCompany:
+          $ref: "#/components/schemas/CompanyDefault"
+        companyIWork:
+          $ref: "#/components/schemas/CompanyDefault"
+        createdAt:
+          type: string
+          example: 10/03/2022 às 11:04
+        updatedAt:
+          type: string
+          example: 10/03/2022 às 11:04
+
+    UserBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          required: true
+          example: Admin Master
+        email:
+          type: string
+          required: true
+          example: user@admin.com
+        document:
+          type: string
+          required: true
+          description: cpj ou cnpj
+          example: 12312312312
+        phone:
+          type: string
+          required: false
+          example: 12912341234
+        birthday:
+          type: string
+          required: false
+          example: 21/02/2000
+        type:
+          type: string
+          required: true
+          enum:
+            [
+              Admin,
+              Admin Master,
+              Cliente,
+              E_Admin,
+              Vendas,
+              Estoque,
+              Fabricação,
+              Instalação,
+              Financeiro,
+            ]
+          example: Admin Master
+        status:
+          type: string
+          required: true
+          enum: [Ativo, Inativo]
+          example: Ativo
+        image:
+          type: string
+          required: false
+          example: www.image.com.br/imagemDoAdmin
+        imageKey:
+          type: string
+          required: false
+          example: fasdfmklmklmf51s56dfdf-ImagemDoAdmin
+        createdAt:
+          type: string
+          example: 10/03/2022 às 11:04
+        updatedAt:
+          type: string
+          example: 10/03/2022 às 11:04

@@ -1,0 +1,308 @@
+paths:
+  /v1/admin/faqs:
+    get:
+      tags: ["FaqsByAdmin(Admin manipula Faqs) - Portal Gerencial"]
+      summary: Rota para listar/filtrar FAQS.
+      description: Rota para listar/filtrar FAQS.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/question_NoAuthIndexFaqs'
+        - $ref: '#/components/parameters/paginate_NoAuthIndexFaqs'
+        - $ref: '#/components/parameters/limit_NoAuthIndexFaqs'
+        - $ref: '#/components/parameters/page_NoAuthIndexFaqs'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  faqs:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/FAQS"
+                  countFaqs:
+                    type: number
+                    example: 1
+        "400":
+          description: Erros envolvendo algum campo obrigatório que não foi enviado ou algum campo inválido.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: question invalida.
+
+        "500":
+          description: Erro interno no servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Erro interno no servidor.
+
+    post:
+      tags: ["FaqsByAdmin(Admin manipula Faqs) - Portal Gerencial"]
+      summary: Rota para cadastrar Faq.
+      description:  Rota para cadastrar Faq.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFaqs'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "FAQ criado com sucesso!"
+
+        "400":
+          description: Erros envolvendo algum campo obrigatório que não foi enviado ou algum campo inválido.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: status inválido.
+
+        "403":
+          description: Sem permissão para acessar esse recurso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Sem permissão para acessar esse recurso.
+
+        "500":
+          description: Erro interno no servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Erro interno no servidor.
+
+  /v1/admin/faqs/{id}:
+    get:
+      tags: ["FaqsByAdmin(Admin manipula Faqs) - Portal Gerencial"]
+      summary: Rota para mostrar faq por Id.
+      description: Rota para mostrar faq por Id.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/id_ShowFaqs'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FAQS'
+        "400":
+          description: Erros envolvendo algum campo obrigatório que não foi enviado ou algum campo inválido.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: id inválido.
+        "403":
+          description: Sem permissão para acessar esse recurso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Sem permissão para acessar esse recurso.
+        "404":
+          description: Faq não encontrado na base de dados.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Faq não encontrado na base de dados.
+        "500":
+          description: Erro interno no servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Erro interno no servidor.
+
+    patch:
+      tags: ["FaqsByAdmin(Admin manipula Faqs) - Portal Gerencial"]
+      summary: Rota para editar faq por Id.
+      description: Rota para editar faq por Id.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/id_ShowFaqs'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditFaqs'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+             schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    required: true
+                    example: FAQ editado com sucesso!
+        "400":
+          description: Erros envolvendo algum campo obrigatório que não foi enviado ou algum campo inválido.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: question inválido.
+        "403":
+          description: Sem permissão para acessar esse recurso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Sem permissão para acessar esse recurso.
+        "404":
+          description: FAQ não encontrado na base de dados.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: FAQ não encontrado na base de dados.
+        "500":
+          description: Erro interno no servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Erro interno no servidor.
+
+    delete:
+      tags: ["FaqsByAdmin(Admin manipula Faqs) - Portal Gerencial"]
+      summary: Rota para deletar faq por Id.
+      description: Rota para deletar faq por Id.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/id_ShowFaqs'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+             schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    required: true
+                    example: FAQ deletado com sucesso!
+        "400":
+          description: Erros envolvendo algum campo obrigatório que não foi enviado ou algum campo inválido.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: question inválido.
+        "403":
+          description: Sem permissão para acessar esse recurso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Sem permissão para acessar esse recurso.
+        "404":
+          description: FAQ não encontrado na base de dados.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: FAQ não encontrado na base de dados.
+        "500":
+          description: Erro interno no servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Erro interno no servidor.

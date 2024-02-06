@@ -1,0 +1,18 @@
+components:
+  schemas:
+    CreateLoginDefault:
+      type: object
+      properties:
+        email:
+          type: string
+          minLength: 1
+          maxLength: 255
+          format: email
+        password:
+          type: string
+          minLength: 8
+          maxLength: 255
+      required:
+        - email
+        - password
+  parameters: {}

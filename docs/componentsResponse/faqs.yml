@@ -1,0 +1,20 @@
+components:
+  schemas:
+    FAQS:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 4
+        createdAt:
+          type: string
+          example: 31/05/2022 às 12:08
+        updatedAt:
+          type: string
+          example: 31/05/2022 às 12:08
+        question:
+          type: string
+          example: Pergunta 01
+        response:
+          type: string
+          example: Resposta 01

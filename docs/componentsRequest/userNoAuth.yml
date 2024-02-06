@@ -1,0 +1,61 @@
+components:
+  schemas:
+    createUserNoAuth:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        document:
+          type: string
+          minLength: 11
+          maxLength: 18
+          example: "12345678912"
+        email:
+          type: string
+          minLength: 1
+          maxLength: 255
+          format: email
+        phone:
+          type: string
+          minLength: 11
+          maxLength: 11
+          pattern: \d{11}
+        birthday:
+          type: string
+          nullable: true
+          description: 'Qualquer formato de data que esteja em ano,mes e dia, exemplo:
+            "2022-01-12T00:00:00.000Z", 2022-01-12 e etc...'
+          example: 2000-01-01
+        password:
+          type: string
+          minLength: 8
+          maxLength: 255
+        confirmPassword:
+          type: string
+          minLength: 8
+          maxLength: 255
+        image:
+          type: string
+          minLength: 1
+          maxLength: 1500
+        imageKey:
+          type: string
+          minLength: 1
+          maxLength: 1500
+        planId:
+          type: integer
+          minimum: 0
+      required:
+        - name
+        - document
+        - email
+        - phone
+        - birthday
+        - password
+        - confirmPassword
+        - image
+        - imageKey
+        - planId
+  parameters: {}

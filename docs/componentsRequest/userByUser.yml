@@ -1,0 +1,229 @@
+components:
+  schemas:
+    createUserByUser:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        document:
+          type: string
+          minLength: 11
+          maxLength: 18
+          example: "12345678912"
+        email:
+          type: string
+          minLength: 1
+          maxLength: 255
+          format: email
+        password:
+          type: string
+          minLength: 8
+          maxLength: 255
+        confirmPassword:
+          type: string
+          minLength: 8
+          maxLength: 255
+        image:
+          type: string
+          nullable: true
+          maxLength: 1500
+        imageKey:
+          type: string
+          nullable: true
+          maxLength: 1500
+        type:
+          type: string
+          enum:
+            - E_Admin
+            - Financeiro
+            - Instalação
+            - Fabricação
+            - Vendas
+            - Estoque
+      required:
+        - name
+        - document
+        - email
+        - password
+        - confirmPassword
+        - type
+    editUserByUser:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          maxLength: 255
+        document:
+          type: string
+          nullable: true
+          minLength: 11
+          maxLength: 18
+          example: "12345678912"
+        email:
+          type: string
+          nullable: true
+          minLength: 1
+          maxLength: 255
+          format: email
+        password:
+          type: string
+          nullable: true
+          minLength: 8
+          maxLength: 255
+        confirmPassword:
+          type: string
+          nullable: true
+          minLength: 8
+          maxLength: 255
+        image:
+          type: string
+          nullable: true
+          maxLength: 1500
+        imageKey:
+          type: string
+          nullable: true
+          maxLength: 1500
+        type:
+          type: string
+          nullable: true
+          enum:
+            - E_Admin
+            - Financeiro
+            - Instalação
+            - Fabricação
+            - Vendas
+            - Estoque
+        status:
+          type: string
+          nullable: true
+          enum:
+            - Ativo
+            - Inativo
+    editSelfUserByUser:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          maxLength: 255
+        email:
+          type: string
+          nullable: true
+          minLength: 1
+          maxLength: 255
+          format: email
+        password:
+          type: string
+          nullable: true
+          minLength: 8
+          maxLength: 255
+        confirmPassword:
+          type: string
+          nullable: true
+          minLength: 8
+          maxLength: 255
+        image:
+          type: string
+          nullable: true
+          maxLength: 1500
+        imageKey:
+          type: string
+          nullable: true
+          maxLength: 1500
+        phone:
+          type: string
+          nullable: true
+          minLength: 11
+          maxLength: 11
+          pattern: \d{11}
+        birthday:
+          type: string
+          nullable: true
+          description: 'Qualquer formato de data que esteja em ano,mes e dia, exemplo:
+            "2022-01-12T00:00:00.000Z", 2022-01-12 e etc...'
+          example: 2000-01-01
+        document:
+          type: string
+          nullable: true
+          minLength: 11
+          maxLength: 18
+          example: "12345678912"
+  parameters:
+    name_indexUserByUser:
+      in: query
+      name: name
+      schema:
+        type: string
+        nullable: true
+        maxLength: 255
+      required: false
+    document_indexUserByUser:
+      in: query
+      name: document
+      schema:
+        type: string
+        nullable: true
+        minLength: 11
+        maxLength: 18
+      required: false
+    status_indexUserByUser:
+      in: query
+      name: status
+      schema:
+        type: string
+        nullable: true
+        enum:
+          - Ativo
+          - Inativo
+          - Todos
+      required: false
+    type_indexUserByUser:
+      in: query
+      name: type
+      schema:
+        type: string
+        nullable: true
+        enum:
+          - E_Admin
+          - Financeiro
+          - Instalação
+          - Fabricação
+          - Vendas
+          - Estoque
+      required: false
+    paginate_indexUserByUser:
+      in: query
+      name: paginate
+      schema:
+        type: string
+        nullable: true
+        enum:
+          - yes
+          - not
+      required: false
+    limit_indexUserByUser:
+      in: query
+      name: limit
+      schema:
+        type: string
+        nullable: true
+        pattern: ^\d+$
+      required: false
+    page_indexUserByUser:
+      in: query
+      name: page
+      schema:
+        type: string
+        nullable: true
+        pattern: ^\d+$
+      required: false
+    id_showUserByUser:
+      in: path
+      name: id
+      schema:
+        type: string
+        pattern: ^\d+$
+      required: true

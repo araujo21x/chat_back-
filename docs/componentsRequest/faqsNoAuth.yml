@@ -1,0 +1,44 @@
+components:
+  schemas: {}
+  parameters:
+    question_NoAuthIndexFaqs:
+      in: query
+      name: question
+      schema:
+        type: string
+        nullable: true
+        maxLength: 255
+      required: false
+    paginate_NoAuthIndexFaqs:
+      in: query
+      name: paginate
+      schema:
+        type: string
+        nullable: true
+        enum:
+          - yes
+          - not
+      required: false
+    limit_NoAuthIndexFaqs:
+      in: query
+      name: limit
+      schema:
+        type: string
+        nullable: true
+        pattern: ^\d+$
+      required: false
+    page_NoAuthIndexFaqs:
+      in: query
+      name: page
+      schema:
+        type: string
+        nullable: true
+        pattern: ^\d+$
+      required: false
+    id_NoAuthShowFaqs:
+      in: path
+      name: id
+      schema:
+        type: string
+        pattern: ^\d+$
+      required: true

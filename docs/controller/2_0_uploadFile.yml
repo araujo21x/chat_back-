@@ -1,0 +1,150 @@
+paths:
+  /v1/upload/standard:
+    post:
+      tags: ["UploadFile(Upload de arquivos) - Geral"]
+      summary: (Geral) -> Rota de upload tradicional de arquivos .
+      description: (Geral) -> Rota de upload tradicional de arquivos.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              required:
+                - file
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: arquivo.png
+                  file:
+                    type: string
+                    example: www.example.com/123-image.png
+                  fileKey:
+                    type: string
+                    example: 123-image.png
+
+        "400":
+          description: Erros envolvendo algum campo obrigatório que não foi enviado ou algum campo inválido.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Arquivo é obrigatório.
+
+        "403":
+          description: Sem permissão para acessar esse recurso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Sem permissão para acessar esse recurso.
+
+        "500":
+          description: Erro interno no servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Erro interno no servidor.
+
+  /v1/upload/noAuth:
+    post:
+      tags: ["UploadFile(Upload de arquivos) - Geral"]
+      summary: (Geral) -> Rota de upload de arquivos sem autenticação.
+      description: (Geral) -> Rota de upload de arquivos sem autenticação, code é código de autenticação.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                code:
+                  type: string
+                  example: fasdfasdfsd
+              required:
+                - file
+                - code
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: arquivo.png
+                  file:
+                    type: string
+                    example: www.example.com/123-image.png
+                  fileKey:
+                    type: string
+                    example: 123-image.png
+
+        "400":
+          description: Erros envolvendo algum campo obrigatório que não foi enviado ou algum campo inválido.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Arquivo é obrigatório.
+
+        "403":
+          description: Sem permissão para acessar esse recurso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Sem permissão para acessar esse recurso.
+
+        "500":
+          description: Erro interno no servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    required: true
+                    example: Erro interno no servidor.

@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app_chat_back
+    command: bash -c "yarn start-dev"
+    restart: always
+    working_dir: /home/app
+    volumes:
+      - .:/usr/app
+    depends_on:
+      app_mysql:
+        condition: service_healthy
+    env_file:
+      - .env
+    ports:
+      -  ${PORT}:${PORT}
+    links:
+      - app_mysql
+
+  app_mysql:
+    image: mysql:8.0
+    container_name: mysql_chat_back
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE_NAME}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_TCP_PORT: ${DB_PORT}
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 15
+    ports:
+      - "${DB_PORT_EXT}:${DB_PORT}"
+    volumes:
+      - app_volume:/var/lib/mysql
+
+volumes:
+  app_volume:
+    driver: local

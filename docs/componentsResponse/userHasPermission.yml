@@ -1,0 +1,16 @@
+components:
+  schemas:
+    UserHasPermission:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        createdAt:
+          type: string
+          example: 10/03/2022 às 11:04
+        updatedAt:
+          type: string
+          example: 10/03/2022 às 11:04
+        permission:
+          $ref: "#/components/schemas/Permission"

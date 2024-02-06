@@ -1,0 +1,22 @@
+components:
+  schemas:
+    Permission:
+      type: object
+      properties:
+        id:
+          type: integer
+          required: true
+          example: 1
+        name:
+          type: string
+          example: Dashboard
+          required: true
+          enum: [Dashboard, 'Contatos', 'Empreendimentos', 'Configurações']
+        createdAt:
+          type: string
+          required: true
+          example: 24/02/2022 às 17:01
+        updatedAt:
+          type: string
+          required: true
+          example: 24/02/2022 às 17:01

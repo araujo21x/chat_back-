@@ -1,0 +1,63 @@
+components:
+  schemas:
+    Address:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        createAt:
+          type: string
+          example: 30/09/2022 às 17:30
+        updatedAt:
+          type: string
+          example: 30/09/2022 às 17:30
+        country:
+          type: string
+          minLength: 1
+          maxLength: 255
+          example: Brasil
+        zipCode:
+          type: string
+          minLength: 8
+          maxLength: 8
+          example: "12345123"
+        street:
+          type: string
+          minLength: 1
+          maxLength: 255
+          example: Rua Silva
+        district:
+          type: string
+          minLength: 1
+          maxLength: 255
+          example: Centro
+        number:
+          type: string
+          minLength: 1
+          maxLength: 255
+          example: "123"
+        city:
+          type: string
+          minLength: 1
+          maxLength: 255
+          example: Salvador
+        state:
+          type: string
+          minLength: 2
+          maxLength: 2
+          example: BA
+        complement:
+          type: string
+          nullable: true
+          maxLength: 255
+          example: teste
+        lat:
+          type: string
+          example: 31.35960000
+        lng:
+          type: string
+          example: 130.71830000
+
+
+

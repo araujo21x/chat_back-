@@ -1,0 +1,143 @@
+# body
+  patch:
+    tags: ["Tag name/module"]
+    summary: exemplo 01.
+    description: exemplo 01 mais detalhado
+    security:
+      - bearerAuth: []
+      # exemplo de rota de editar, caso seja uma rota sem path pode tirar o parameters
+    parameters:
+      - $ref: '#/components/parameters/id_showAdmin'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/editAdmin'
+    responses:
+      "200":
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  required: true
+                  example: Usuário editado com sucesso!
+                user:
+                  $ref: '#/components/schemas/UserDefault'
+      "400":
+        description: Erros envolvendo algum campo obrigatório que não foi enviado ou algum campo inválido.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  required: true
+                  example: email é inválido.
+      "403":
+        description: Sem permissão para acessar esse recurso.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  required: true
+                  example: Sem permissão para acessar esse recurso.
+      "404":
+        description: Usuário não encontrado na base de dados.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  required: true
+                  example: Usuário não encontrado na base de dados.
+      "500":
+        description: Erro interno no servidor.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  required: true
+                  example: Erro interno no servidor.
+# params and path
+  get:
+    tags: ["Tag name/module"]
+    summary: exemplo 01.
+    description: exemplo 01 mais detalhado
+    security:
+      - bearerAuth: []
+    parameters:
+      - $ref: '#/components/parameters/name_indexAdmin'
+      - $ref: '#/components/parameters/status_indexAdmin'
+    responses:
+      "200":
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                countUsers:
+                  type": "number"
+                  example: 1
+                users:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/UserDefault"
+      "400":
+        description: Erros envolvendo algum campo obrigatório que não foi enviado ou algum campo inválido.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  required: true
+                  example: email é inválido.
+      "403":
+        description: Sem permissão para acessar esse recurso.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  required: true
+                  example: Sem permissão para acessar esse recurso.
+      "404":
+        description: Usuário não encontrado na base de dados.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  required: true
+                  example: Usuário não encontrado na base de dados.
+      "500":
+        description: Erro interno no servidor.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  required: true
+                  example: Erro interno no servidor.

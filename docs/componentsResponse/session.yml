@@ -1,0 +1,17 @@
+components:
+  schemas:
+    Authorized:
+      type: object
+      properties:
+        token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsInVzZXJSb2xlIjoiQWRtaW4gTWFzdGVyIiwiaWF0IjoxNjQ2MDcwMDE3LCJleHAiOjE2NDY2NzQ4MTd9.Yrq5QYnAcScuW4SsJ6tO4EDLZhClrlAnRAkOgvKhp9M
+        user:
+          $ref: '#/components/schemas/UserDefault'
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      description: Cabeçalho de autorização JWT usando o esquema Bearer.
+      scheme: bearer
+      bearerFormat: JWT
